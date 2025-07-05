@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Employee Time Worked</title>
+  <style>
+    table { border-collapse: collapse; width: 60%; margin: 30px auto; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    tr.low-hours { background-color: #ffebeb; }  
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center">Employees Ordered by Total Hours</h2>
+
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Total Hours</th></tr>
+    </thead>
+    <tbody>
+      {% for e in employees %}
+        <tr class="{% if e.hours < 100 %}low-hours{% endif %}">
+          <td>{{ e.name }}</td>
+          <td>{{ e.hours|floatformat:2 }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p style="text-align:center">
+    <img src="{% url 'pie_png' %}" alt="Pie Chart of Hours" />
+  </p>
+</body>
+</html>
